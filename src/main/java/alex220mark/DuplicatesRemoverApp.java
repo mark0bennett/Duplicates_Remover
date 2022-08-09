@@ -23,8 +23,6 @@ public class DuplicatesRemoverApp extends Application {
 	Label statusLabel = new Label("");
 
 	// TODO: dont print errors to console, print them to the stage/window
-	// TODO: it will overwrite some csv's if it can read them in - should check that
-	// ONLY 2 columns are filled
 	// TODO: exception if you hit submit without choosing a file
 	// TODO: has to be name - number, display the error if you try a file that is
 	// number - name

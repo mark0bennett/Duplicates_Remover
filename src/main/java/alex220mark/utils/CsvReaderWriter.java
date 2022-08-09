@@ -28,6 +28,10 @@ public class CsvReaderWriter {
 				while ((line = bufferedReader.readLine()) != null) {
 					// splits the csv by a comma and creates an array
 					String[] readLine = line.split(splitBy);
+					// check that the csv only has 2 columns, will return empty list if it has more
+					if (readLine.length >= 3) {
+						return new ArrayList<>();
+					}
 					// creates new Item using index 0 (name) and index 1 (number) from the readLine
 					// array including all duplicates
 					Item itemToAdd = new Item(readLine[0], Integer.valueOf(readLine[1]));
