@@ -29,6 +29,7 @@ public class DuplicatesRemoverApp extends Application {
 	// TODO: has to be name - number, display the error if you try a file that is
 	// number - name
 	// TODO: add an example of correct format for a csv 
+	// TODO: target - META-INF pom.properties keeps updating time and date?
 	public static void main(String[] args) {
 		launch(args);
 	}
