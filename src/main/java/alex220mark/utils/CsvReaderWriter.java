@@ -54,11 +54,9 @@ public class CsvReaderWriter {
 	}
 
 	// exports a new csv file from a Map after the duplicates have been removed
-	public static void exportCsvFile(Map<String, Integer> mapToExport) {
+	public static void exportCsvFile(Map<String, Integer> mapToExport, String saveFilePath) {
 		try {
-			// TODO: can we add a custom way to export the csv location, different dir paths
-			// for different computers
-			PrintWriter writer = new PrintWriter("C:\\Users\\markb\\Downloads\\newDuplicatesRemovedFile.csv");
+			PrintWriter writer = new PrintWriter(saveFilePath + ".csv");
 			// for each entry - export to a line in the csv (name, number,)
 			for (Map.Entry<String, Integer> entry : mapToExport.entrySet()) {
 				writer.println(capitalizeString(entry.getKey()) + "," + entry.getValue().toString() + ",");
