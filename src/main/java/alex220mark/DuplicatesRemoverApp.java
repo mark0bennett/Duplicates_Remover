@@ -27,7 +27,7 @@ public class DuplicatesRemoverApp extends Application {
 	// TODO: exception if you hit submit without choosing a file
 	// TODO: has to be name - number, display the error if you try a file that is
 	// number - name
-	// TODO: add an example of correct format for a csv 
+	// TODO: add an example of correct format for a csv
 	// TODO: target - META-INF pom.properties keeps updating time and date?
 	public static void main(String[] args) {
 		launch(args);
@@ -41,22 +41,22 @@ public class DuplicatesRemoverApp extends Application {
 		Button button = new Button("Select File To Remove Duplicates From");
 		Label fileLabel = new Label("No File Chosen");
 		Button submitButton = new Button("Submit");
-		
-		//intro screen 
+
+		// intro screen
 		Button continueButton = new Button("Continue");
-		
-		//duplicates remover screen setup
-				VBox removeDuplicatesVBox = new VBox(button, fileLabel, submitButton, statusLabel);
-				removeDuplicatesVBox.setAlignment(Pos.CENTER);
-				removeDuplicatesVBox.setStyle("-fx-background-color: lightblue;");
-				Scene removeDuplicatesScene = new Scene(removeDuplicatesVBox, 600, 600);
-		
-				//intro screen button
+
+		// duplicates remover screen setup
+		VBox removeDuplicatesVBox = new VBox(button, fileLabel, submitButton, statusLabel);
+		removeDuplicatesVBox.setAlignment(Pos.CENTER);
+		removeDuplicatesVBox.setStyle("-fx-background-color: lightblue;");
+		Scene removeDuplicatesScene = new Scene(removeDuplicatesVBox, 600, 600);
+
+		// intro screen button
 		continueButton.setOnAction(e -> {
 			primaryStage.setScene(removeDuplicatesScene);
 		});
 
-		//duplicates screen buttons
+		// duplicates screen buttons
 		button.setOnAction(e -> {
 			File selectedFile = fileChooser.showOpenDialog(primaryStage);
 			try {
@@ -82,7 +82,7 @@ public class DuplicatesRemoverApp extends Application {
 			}
 		});
 
-		//intro screen setup
+		// intro screen setup
 		VBox introVBox = new VBox(continueButton);
 		introVBox.setAlignment(Pos.BOTTOM_CENTER);
 		introVBox.setPadding(new Insets(20));
@@ -90,9 +90,8 @@ public class DuplicatesRemoverApp extends Application {
 		Scene introScene = new Scene(introVBox, 600, 600);
 		primaryStage.setScene(introScene);
 		primaryStage.show();
-		
+
 		primaryStage.setTitle("Duplicate Remover App");
-		
 
 	}
 
