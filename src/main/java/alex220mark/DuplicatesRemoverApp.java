@@ -26,9 +26,6 @@ public class DuplicatesRemoverApp extends Application {
 
 	// TODO: dont print errors to console, print them to the stage/window
 	// TODO: exception if you hit submit without choosing a file
-	// TODO: has to be name - number, display the error if you try a file that is
-	// number - name
-	// TODO: add an example of correct format for a csv
 	// TODO: target - META-INF pom.properties keeps updating time and date?
 	public static void main(String[] args) {
 		launch(args);
