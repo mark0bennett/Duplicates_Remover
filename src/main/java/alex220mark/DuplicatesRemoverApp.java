@@ -21,9 +21,6 @@ import javafx.stage.Stage;
 
 public class DuplicatesRemoverApp extends Application {
 
-	// TODO: don't have an explicit file path for the image, reference to the class
-	// path only? Resource as Input Stream?
-
 	String selectedFilePath = "no_file_chosen_yet";
 	Label statusLabel = new Label("");
 	String selectedSaveFilePath = "";
@@ -45,10 +42,10 @@ public class DuplicatesRemoverApp extends Application {
 		// intro screen setup
 		Button continueButton = new Button("Continue");
 		Label introLabel = new Label("CORRECT FORMAT FOR CSV FILE");
-		Label formatExplanationLabel = new Label("Only 2 columns, NAME in column A and NUMBER in column B!");
-		// intro screen image
-		Image correctFormatImage = new Image(
-				"D:\\Java\\Spring Tools Suite\\Projects\\Duplicates_Remover\\Correct_Format.JPG");
+		Label formatExplanationLabel = new Label("Only 2 columns, NAME in column A and NUMBER in column B");
+		// intro screen image, image is in resources folder - so it searches for
+		// resources with this name
+		Image correctFormatImage = new Image("Correct_Format.JPG");
 		ImageView imageView = new ImageView(correctFormatImage);
 
 		// duplicates remover screen setup
