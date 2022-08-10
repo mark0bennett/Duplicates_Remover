@@ -8,11 +8,12 @@ import alex220mark.models.Item;
 import alex220mark.utils.CsvReaderWriter;
 import alex220mark.utils.DuplicateRemover;
 import javafx.application.Application;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -41,15 +42,30 @@ public class DuplicatesRemoverApp extends Application {
 		Button button = new Button("Select File To Remove Duplicates From");
 		Label fileLabel = new Label("No File Chosen");
 		Button submitButton = new Button("Submit");
+		Button backButton = new Button("Back");
 
-		// intro screen
+		// intro screen setup
 		Button continueButton = new Button("Continue");
+		Label introLabel = new Label("CORRECT FORMAT FOR CSV FILE");
+		Label formatExplanationLabel = new Label("Only 2 columns, NAME in column A and NUMBER in column B!");
+		// intro screen image
+		// TODO: not have an explicit file path, reference to the class path only?
+		Image correctFormatImage = new Image(
+				"D:\\Java\\Spring Tools Suite\\Projects\\Duplicates_Remover\\Correct_Format.JPG");
+		ImageView imageView = new ImageView(correctFormatImage);
 
 		// duplicates remover screen setup
-		VBox removeDuplicatesVBox = new VBox(button, fileLabel, submitButton, statusLabel);
+		VBox removeDuplicatesVBox = new VBox(button, fileLabel, submitButton, statusLabel, backButton);
 		removeDuplicatesVBox.setAlignment(Pos.CENTER);
 		removeDuplicatesVBox.setStyle("-fx-background-color: lightblue;");
 		Scene removeDuplicatesScene = new Scene(removeDuplicatesVBox, 600, 600);
+
+		// intro screen setup
+		VBox introVBox = new VBox(introLabel, formatExplanationLabel, imageView, continueButton);
+		introVBox.setAlignment(Pos.CENTER);
+		introVBox.setSpacing(20);
+		introVBox.setStyle("-fx-background-color: lightgray;");
+		Scene introScene = new Scene(introVBox, 600, 600);
 
 		// intro screen button
 		continueButton.setOnAction(e -> {
@@ -82,12 +98,10 @@ public class DuplicatesRemoverApp extends Application {
 			}
 		});
 
-		// intro screen setup
-		VBox introVBox = new VBox(continueButton);
-		introVBox.setAlignment(Pos.BOTTOM_CENTER);
-		introVBox.setPadding(new Insets(20));
-		introVBox.setStyle("-fx-background-color: lightgray;");
-		Scene introScene = new Scene(introVBox, 600, 600);
+		backButton.setOnAction(e -> {
+			primaryStage.setScene(introScene);
+		});
+
 		primaryStage.setScene(introScene);
 		primaryStage.show();
 
