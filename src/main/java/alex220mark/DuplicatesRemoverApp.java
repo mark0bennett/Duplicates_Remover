@@ -8,6 +8,7 @@ import alex220mark.models.Item;
 import alex220mark.utils.CsvReaderWriter;
 import alex220mark.utils.DuplicateRemover;
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -40,7 +41,22 @@ public class DuplicatesRemoverApp extends Application {
 		Button button = new Button("Select File To Remove Duplicates From");
 		Label fileLabel = new Label("No File Chosen");
 		Button submitButton = new Button("Submit");
+		
+		//intro screen 
+		Button continueButton = new Button("Continue");
+		
+		//duplicates remover screen setup
+				VBox removeDuplicatesVBox = new VBox(button, fileLabel, submitButton, statusLabel);
+				removeDuplicatesVBox.setAlignment(Pos.CENTER);
+				removeDuplicatesVBox.setStyle("-fx-background-color: lightblue;");
+				Scene removeDuplicatesScene = new Scene(removeDuplicatesVBox, 600, 600);
+		
+				//intro screen button
+		continueButton.setOnAction(e -> {
+			primaryStage.setScene(removeDuplicatesScene);
+		});
 
+		//duplicates screen buttons
 		button.setOnAction(e -> {
 			File selectedFile = fileChooser.showOpenDialog(primaryStage);
 			try {
@@ -66,13 +82,17 @@ public class DuplicatesRemoverApp extends Application {
 			}
 		});
 
-		VBox vBox = new VBox(button, fileLabel, submitButton, statusLabel);
-		vBox.setAlignment(Pos.CENTER);
-		vBox.setStyle("-fx-background-color: lightblue;");
-		Scene scene = new Scene(vBox, 600, 300);
-		primaryStage.setTitle("Duplicate Remover App");
-		primaryStage.setScene(scene);
+		//intro screen setup
+		VBox introVBox = new VBox(continueButton);
+		introVBox.setAlignment(Pos.BOTTOM_CENTER);
+		introVBox.setPadding(new Insets(20));
+		introVBox.setStyle("-fx-background-color: lightgray;");
+		Scene introScene = new Scene(introVBox, 600, 600);
+		primaryStage.setScene(introScene);
 		primaryStage.show();
+		
+		primaryStage.setTitle("Duplicate Remover App");
+		
 
 	}
 
