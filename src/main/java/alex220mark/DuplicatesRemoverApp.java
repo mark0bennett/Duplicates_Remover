@@ -35,7 +35,7 @@ public class DuplicatesRemoverApp extends Application {
 
 		FileChooser fileChooser = new FileChooser();
 
-		Button button = new Button("Select File To Remove Duplicates From");
+		Button selectFileButton = new Button("Select File To Remove Duplicates From");
 		Label fileLabel = new Label("No File Chosen");
 		Button submitButton = new Button("Submit");
 		Button backButton = new Button("Back");
@@ -51,7 +51,7 @@ public class DuplicatesRemoverApp extends Application {
 		ImageView imageView = new ImageView(correctFormatImage);
 
 		// duplicates remover screen setup
-		VBox removeDuplicatesVBox = new VBox(button, fileLabel, submitButton, statusLabel, backButton);
+		VBox removeDuplicatesVBox = new VBox(selectFileButton, fileLabel, submitButton, statusLabel, backButton);
 		removeDuplicatesVBox.setAlignment(Pos.CENTER);
 		removeDuplicatesVBox.setStyle("-fx-background-color: lightblue;");
 		Scene removeDuplicatesScene = new Scene(removeDuplicatesVBox, 600, 600);
@@ -69,7 +69,7 @@ public class DuplicatesRemoverApp extends Application {
 		});
 
 		// duplicates screen buttons
-		button.setOnAction(e -> {
+		selectFileButton.setOnAction(e -> {
 			File selectedFile = fileChooser.showOpenDialog(primaryStage);
 			try {
 				selectedFilePath = selectedFile.getAbsolutePath();
