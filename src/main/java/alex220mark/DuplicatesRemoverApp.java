@@ -21,11 +21,10 @@ import javafx.stage.Stage;
 
 public class DuplicatesRemoverApp extends Application {
 
-	String selectedFilePath = "";
+	String selectedFilePath = "no_file_chosen_yet";
 	Label statusLabel = new Label("");
 
 	// TODO: dont print errors to console, print them to the stage/window
-	// TODO: exception if you hit submit without choosing a file
 	// TODO: target - META-INF pom.properties keeps updating time and date?
 	public static void main(String[] args) {
 		launch(args);
@@ -80,18 +79,23 @@ public class DuplicatesRemoverApp extends Application {
 		});
 
 		submitButton.setOnAction(e -> {
-			List<Item> readListFromFile = CsvReaderWriter.readCsvFile(selectedFilePath);
-			if (readListFromFile.isEmpty()) {
+			if (selectedFilePath.equals("no_file_chosen_yet")) {
 				statusLabel.setTextFill(Color.RED);
-				statusLabel.setText("Invalid file, pick a .csv file and check format of csv file");
+				statusLabel.setText("Please select a file...");
 			} else {
+				List<Item> readListFromFile = CsvReaderWriter.readCsvFile(selectedFilePath);
+				if (readListFromFile.isEmpty()) {
+					statusLabel.setTextFill(Color.RED);
+					statusLabel.setText("Invalid file, pick a .csv file and check format of csv file");
+				} else {
 
-				Map<String, Integer> finalMapFromReadListFromFile = DuplicateRemover
-						.convertListToMapAndRemoveDuplicates(readListFromFile);
+					Map<String, Integer> finalMapFromReadListFromFile = DuplicateRemover
+							.convertListToMapAndRemoveDuplicates(readListFromFile);
 
-				CsvReaderWriter.exportCsvFile(finalMapFromReadListFromFile);
-				statusLabel.setTextFill(Color.BLACK);
-				statusLabel.setText("DONE");
+					CsvReaderWriter.exportCsvFile(finalMapFromReadListFromFile);
+					statusLabel.setTextFill(Color.BLACK);
+					statusLabel.setText("DONE");
+				}
 			}
 		});
 
