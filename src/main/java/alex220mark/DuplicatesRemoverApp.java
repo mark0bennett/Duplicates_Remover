@@ -21,12 +21,13 @@ import javafx.stage.Stage;
 
 public class DuplicatesRemoverApp extends Application {
 
+	// TODO: don't have an explicit file path for the image, reference to the class
+	// path only? Resource as Input Stream?
+
 	String selectedFilePath = "no_file_chosen_yet";
 	Label statusLabel = new Label("");
 	String selectedSaveFilePath = "";
 
-	// TODO: dont print errors to console, print them to the stage/window
-	// TODO: target - META-INF pom.properties keeps updating time and date?
 	public static void main(String[] args) {
 		launch(args);
 	}
@@ -46,7 +47,6 @@ public class DuplicatesRemoverApp extends Application {
 		Label introLabel = new Label("CORRECT FORMAT FOR CSV FILE");
 		Label formatExplanationLabel = new Label("Only 2 columns, NAME in column A and NUMBER in column B!");
 		// intro screen image
-		// TODO: not have an explicit file path, reference to the class path only?
 		Image correctFormatImage = new Image(
 				"D:\\Java\\Spring Tools Suite\\Projects\\Duplicates_Remover\\Correct_Format.JPG");
 		ImageView imageView = new ImageView(correctFormatImage);
@@ -80,24 +80,25 @@ public class DuplicatesRemoverApp extends Application {
 		});
 
 		submitButton.setOnAction(e -> {
-			//if no file chosen, error message
+			// if no file chosen, error message
 			if (selectedFilePath.equals("no_file_chosen_yet")) {
 				statusLabel.setTextFill(Color.RED);
 				statusLabel.setText("Please select a file...");
 			} else {
-				//if list comes back empty error message
+				// if list comes back empty error message
 				List<Item> readListFromFile = CsvReaderWriter.readCsvFile(selectedFilePath);
 				if (readListFromFile.isEmpty()) {
 					statusLabel.setTextFill(Color.RED);
 					statusLabel.setText("Invalid file, pick a .csv file and check format of csv file");
 				} else {
-					//custom save location dialog opens
+					// custom save location dialog opens
 					File selectedSaveLocation = fileChooser.showSaveDialog(primaryStage);
 					try {
 						selectedSaveFilePath = selectedSaveLocation.getAbsolutePath();
 					} catch (NullPointerException exception) {
 					}
-					// removes duplicates from selected file and then exports it to the save location
+					// removes duplicates from selected file and then exports it to the save
+					// location
 					Map<String, Integer> finalMapFromReadListFromFile = DuplicateRemover
 							.convertListToMapAndRemoveDuplicates(readListFromFile);
 
