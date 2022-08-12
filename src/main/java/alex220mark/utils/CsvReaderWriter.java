@@ -32,8 +32,9 @@ public class CsvReaderWriter {
 						return new ArrayList<>();
 					}
 					// creates new Item using index 0 (name) and index 1 (number) from the readLine
-					// array including all duplicates
-					Item itemToAdd = new Item(readLine[0], Integer.valueOf(readLine[1]));
+					// array including all duplicates - remove all whitespace before adding
+					String nameWhiteSpaceRemoved = readLine[0].trim().replaceAll(" +", " ");
+					Item itemToAdd = new Item(nameWhiteSpaceRemoved, Integer.valueOf(readLine[1]));
 					// adds the newly created Item to the readList ArrayList (which will be the
 					// final returned list)
 					readList.add(itemToAdd);
