@@ -11,13 +11,13 @@ public class DuplicateRemover {
 	public static Map<String, Integer> convertListToMapAndRemoveDuplicates(List<Item> initialMap) {
 		// create new Map to return
 		Map<String, Integer> finalMap = new HashMap<>();
-		// adding the names from the array to the map, this removes duplicate names
+		// adding the names from the List Parameter to the new map (in all caps), this
+		// removes duplicate names
 		for (int i = 0; i < initialMap.size(); i++) {
 			finalMap.put(initialMap.get(i).getName().toUpperCase(), 0);
 		}
-
 		// checking if the name exists in the finalMap and if it does adds the
-		// intialList number to finalMap number
+		// intialList number to finalMap number to give us a total number
 		for (int i = 0; i < initialMap.size(); i++) {
 			String itemUpperCase = initialMap.get(i).getName().toUpperCase();
 			if (finalMap.keySet().contains(itemUpperCase)) {
@@ -27,5 +27,5 @@ public class DuplicateRemover {
 		}
 		return finalMap;
 	}
-
+	
 }

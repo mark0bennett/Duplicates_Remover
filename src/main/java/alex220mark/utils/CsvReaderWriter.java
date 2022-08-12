@@ -13,7 +13,6 @@ public class CsvReaderWriter {
 
 	// reads in the csv file using import path
 	public static List<Item> readCsvFile(String importPath) {
-
 		// checks that file to be read has the extension *.csv
 		if (importPath.substring(importPath.length() - 4).equals(".csv")) {
 			// to check for blank line in csv
