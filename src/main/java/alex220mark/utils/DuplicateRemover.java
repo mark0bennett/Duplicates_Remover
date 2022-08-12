@@ -13,7 +13,6 @@ public class DuplicateRemover {
 		Map<String, Integer> finalMap = new HashMap<>();
 		// adding the names from the List Parameter to the new map (in all caps), this
 		// removes duplicate names
-		// TODO: need to account for names with more than 1 whitespace between words, here? or when we read in csv?
 		for (int i = 0; i < initialList.size(); i++) {
 			finalMap.put(initialList.get(i).getName().toUpperCase(), 0);
 		}
