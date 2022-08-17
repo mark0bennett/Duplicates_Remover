@@ -28,7 +28,8 @@ public class CsvReaderWriter {
 					// splits the csv by a comma and creates an array
 					String[] readLine = line.split(splitBy);
 					// check that the csv only has 2 columns, will return empty list if it has more
-					if (readLine.length >= 3) {
+					// and will return an empty list is an column is blank
+					if (readLine.length >= 3 || readLine[0].isBlank() || readLine[1].isBlank()) {
 						return new ArrayList<>();
 					}
 					// creates new Item using index 0 (name) and index 1 (number) from the readLine
@@ -68,7 +69,7 @@ public class CsvReaderWriter {
 	}
 
 	// Capitalises the first letter of each word in String for export into new csv
-	private static String capitalizeString(String string) {
+	public static String capitalizeString(String string) {
 		char[] chars = string.toLowerCase().toCharArray();
 		boolean found = false;
 		for (int i = 0; i < chars.length; i++) {
