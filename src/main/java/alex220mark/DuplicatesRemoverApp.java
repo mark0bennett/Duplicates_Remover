@@ -21,6 +21,9 @@ import javafx.stage.Stage;
 
 public class DuplicatesRemoverApp extends Application {
 
+	// We could have only used a Map, and not had an Item class
+	// Do all the reading/removal of duplicates/writing in one class
+
 	String selectedFilePath = "no_file_chosen_yet";
 	Label statusLabel = new Label("");
 	String selectedSaveFilePath = "";
