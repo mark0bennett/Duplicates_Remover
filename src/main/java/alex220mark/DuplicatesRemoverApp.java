@@ -21,6 +21,9 @@ import javafx.stage.Stage;
 
 public class DuplicatesRemoverApp extends Application {
 
+	// We could have only used a Map, and not had an Item class
+	// Do all the reading/removal of duplicates/writing in one class
+
 	String selectedFilePath = "no_file_chosen_yet";
 	Label statusLabel = new Label("");
 	String selectedSaveFilePath = "";
@@ -88,7 +91,7 @@ public class DuplicatesRemoverApp extends Application {
 				List<Item> readListFromFile = CsvReaderWriter.readCsvFile(selectedFilePath);
 				if (readListFromFile.isEmpty()) {
 					statusLabel.setTextFill(Color.RED);
-					statusLabel.setText("Invalid file, pick a .csv file and check format of csv file");
+					statusLabel.setText("Invalid file, pick a .csv file, check format of csv file, and for blank rows");
 				} else {
 					// custom save location dialog opens
 					File selectedSaveLocation = fileChooser.showSaveDialog(primaryStage);
