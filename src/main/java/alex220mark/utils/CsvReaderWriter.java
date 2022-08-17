@@ -34,7 +34,11 @@ public class CsvReaderWriter {
 					}
 					// creates new Item using index 0 (name) and index 1 (number) from the readLine
 					// array including all duplicates - remove all whitespace before adding
-					String nameWhiteSpaceRemoved = readLine[0].trim().replaceAll(" +", " ");
+					// the number column in a csv will not allow leading and trailing whitespace
+					// if a number is "1 2" - this may call for user to double check which is
+					// correct
+					// we will not remove white space in between numbers, only return invalid file
+					String nameWhiteSpaceRemoved = removeWhiteSpaceFromString(readLine[0]);
 					Item itemToAdd = new Item(nameWhiteSpaceRemoved, Integer.valueOf(readLine[1]));
 					// adds the newly created Item to the readList ArrayList (which will be the
 					// final returned list)
@@ -64,7 +68,7 @@ public class CsvReaderWriter {
 			}
 			writer.close();
 		} catch (Exception e) {
-			// TODO: do something if we have an exception
+			e.printStackTrace();
 		}
 	}
 
@@ -81,6 +85,10 @@ public class CsvReaderWriter {
 			}
 		}
 		return String.valueOf(chars);
+	}
+
+	public static String removeWhiteSpaceFromString(String originalString) {
+		return originalString.trim().replaceAll(" +", " ");
 	}
 
 }
