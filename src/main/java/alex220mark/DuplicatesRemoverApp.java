@@ -1,13 +1,10 @@
 package alex220mark;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 
-import alex220mark.models.Item;
 import alex220mark.utils.CsvExporter;
 import alex220mark.utils.CsvReader;
-import alex220mark.utils.DuplicateRemover;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -86,8 +83,8 @@ public class DuplicatesRemoverApp extends Application {
 				statusLabel.setText("Please select a file...");
 			} else {
 				// if list comes back empty error message
-				List<Item> readListFromFile = CsvReader.readCsvFile(selectedFilePath);
-				if (readListFromFile.isEmpty()) {
+				Map<String, Integer> readMapFromFile = CsvReader.readCsvFile(selectedFilePath);
+				if (readMapFromFile.isEmpty()) {
 					statusLabel.setTextFill(Color.RED);
 					statusLabel.setText("Invalid file, pick a .csv file, check format of csv file, and for blank rows");
 				} else {
@@ -97,12 +94,8 @@ public class DuplicatesRemoverApp extends Application {
 						selectedSaveFilePath = selectedSaveLocation.getAbsolutePath();
 					} catch (NullPointerException exception) {
 					}
-					// removes duplicates from selected file and then exports it to the save
-					// location
-					Map<String, Integer> finalMapFromReadListFromFile = DuplicateRemover
-							.convertListToMapAndRemoveDuplicates(readListFromFile);
 
-					CsvExporter.exportCsvFile(finalMapFromReadListFromFile, selectedSaveFilePath);
+					CsvExporter.exportCsvFile(readMapFromFile, selectedSaveFilePath);
 					statusLabel.setTextFill(Color.GREEN);
 					statusLabel.setText("DONE - Duplicates Removed and File Saved!");
 				}
