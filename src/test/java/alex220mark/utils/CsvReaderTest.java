@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class CsvReaderWriterTest {
+public class CsvReaderTest {
 
-	private CsvReaderWriter underTest;
+	private CsvReader underTest;
 
 	@Test
 	void itShouldRemoveAllWhiteSpace() {

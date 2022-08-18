@@ -6,7 +6,7 @@ import java.util.Map;
 
 import alex220mark.models.Item;
 import alex220mark.utils.CsvExporter;
-import alex220mark.utils.CsvReaderWriter;
+import alex220mark.utils.CsvReader;
 import alex220mark.utils.DuplicateRemover;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -86,7 +86,7 @@ public class DuplicatesRemoverApp extends Application {
 				statusLabel.setText("Please select a file...");
 			} else {
 				// if list comes back empty error message
-				List<Item> readListFromFile = CsvReaderWriter.readCsvFile(selectedFilePath);
+				List<Item> readListFromFile = CsvReader.readCsvFile(selectedFilePath);
 				if (readListFromFile.isEmpty()) {
 					statusLabel.setTextFill(Color.RED);
 					statusLabel.setText("Invalid file, pick a .csv file, check format of csv file, and for blank rows");
