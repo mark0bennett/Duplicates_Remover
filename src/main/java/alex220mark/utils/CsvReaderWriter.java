@@ -28,12 +28,17 @@ public class CsvReaderWriter {
 					// splits the csv by a comma and creates an array
 					String[] readLine = line.split(splitBy);
 					// check that the csv only has 2 columns, will return empty list if it has more
-					if (readLine.length >= 3) {
+					// and will return an empty list is an column is blank
+					if (readLine.length >= 3 || readLine[0].isBlank() || readLine[1].isBlank()) {
 						return new ArrayList<>();
 					}
 					// creates new Item using index 0 (name) and index 1 (number) from the readLine
 					// array including all duplicates - remove all whitespace before adding
-					String nameWhiteSpaceRemoved = readLine[0].trim().replaceAll(" +", " ");
+					// the number column in a csv will not allow leading and trailing whitespace
+					// if a number is "1 2" - this may call for user to double check which is
+					// correct
+					// we will not remove white space in between numbers, only return invalid file
+					String nameWhiteSpaceRemoved = removeWhiteSpaceFromString(readLine[0]);
 					Item itemToAdd = new Item(nameWhiteSpaceRemoved, Integer.valueOf(readLine[1]));
 					// adds the newly created Item to the readList ArrayList (which will be the
 					// final returned list)
@@ -63,12 +68,12 @@ public class CsvReaderWriter {
 			}
 			writer.close();
 		} catch (Exception e) {
-			// TODO: do something if we have an exception
+			e.printStackTrace();
 		}
 	}
 
 	// Capitalises the first letter of each word in String for export into new csv
-	private static String capitalizeString(String string) {
+	public static String capitalizeString(String string) {
 		char[] chars = string.toLowerCase().toCharArray();
 		boolean found = false;
 		for (int i = 0; i < chars.length; i++) {
@@ -80,6 +85,10 @@ public class CsvReaderWriter {
 			}
 		}
 		return String.valueOf(chars);
+	}
+
+	public static String removeWhiteSpaceFromString(String originalString) {
+		return originalString.trim().replaceAll(" +", " ");
 	}
 
 }
