@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import alex220mark.models.Item;
+import alex220mark.utils.CsvExporter;
 import alex220mark.utils.CsvReaderWriter;
 import alex220mark.utils.DuplicateRemover;
 import javafx.application.Application;
@@ -20,9 +21,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class DuplicatesRemoverApp extends Application {
-
-	// We could have only used a Map, and not had an Item class
-	// Do all the reading/removal of duplicates/writing in one class
 
 	String selectedFilePath = "no_file_chosen_yet";
 	Label statusLabel = new Label("");
@@ -104,7 +102,7 @@ public class DuplicatesRemoverApp extends Application {
 					Map<String, Integer> finalMapFromReadListFromFile = DuplicateRemover
 							.convertListToMapAndRemoveDuplicates(readListFromFile);
 
-					CsvReaderWriter.exportCsvFile(finalMapFromReadListFromFile, selectedSaveFilePath);
+					CsvExporter.exportCsvFile(finalMapFromReadListFromFile, selectedSaveFilePath);
 					statusLabel.setTextFill(Color.GREEN);
 					statusLabel.setText("DONE - Duplicates Removed and File Saved!");
 				}
