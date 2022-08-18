@@ -6,9 +6,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-public class CsvReaderWriterTest {
+public class CsvReaderTest {
 
-	private CsvReaderWriter underTest;
+	private CsvReader underTest;
 
 	@Test
 	void itShouldRemoveAllWhiteSpace() {
@@ -18,18 +18,6 @@ public class CsvReaderWriterTest {
 				underTest.removeWhiteSpaceFromString("  red socks "),
 				underTest.removeWhiteSpaceFromString(" red    socks "),
 				underTest.removeWhiteSpaceFromString("red   socks"));
-		assertLinesMatch(spaces, spacesRemoved);
-	}
-
-	@Test
-	void itShouldCapitalise() {
-		List<String> spaces = List.of("Red Socks", "Red Socks", "Red Socks", "Red Socks", "Red Socks", "Red Socks");
-		List<String> spacesRemoved = List.of(underTest.capitalizeString("red socks"),
-				underTest.capitalizeString("Red socks"),
-				underTest.capitalizeString("red Socks"),
-				underTest.capitalizeString("Red Socks"),
-				underTest.capitalizeString("reD soCKs"),
-				underTest.capitalizeString("rEd SOckS"));
 		assertLinesMatch(spaces, spacesRemoved);
 	}
 

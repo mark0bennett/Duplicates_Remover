@@ -1,12 +1,10 @@
 package alex220mark;
 
 import java.io.File;
-import java.util.List;
 import java.util.Map;
 
-import alex220mark.models.Item;
-import alex220mark.utils.CsvReaderWriter;
-import alex220mark.utils.DuplicateRemover;
+import alex220mark.utils.CsvExporter;
+import alex220mark.utils.CsvReader;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -20,9 +18,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class DuplicatesRemoverApp extends Application {
-
-	// We could have only used a Map, and not had an Item class
-	// Do all the reading/removal of duplicates/writing in one class
 
 	String selectedFilePath = "no_file_chosen_yet";
 	Label statusLabel = new Label("");
@@ -88,8 +83,8 @@ public class DuplicatesRemoverApp extends Application {
 				statusLabel.setText("Please select a file...");
 			} else {
 				// if list comes back empty error message
-				List<Item> readListFromFile = CsvReaderWriter.readCsvFile(selectedFilePath);
-				if (readListFromFile.isEmpty()) {
+				Map<String, Integer> readMapFromFile = CsvReader.readCsvFile(selectedFilePath);
+				if (readMapFromFile.isEmpty()) {
 					statusLabel.setTextFill(Color.RED);
 					statusLabel.setText("Invalid file, pick a .csv file, check format of csv file, and for blank rows");
 				} else {
@@ -99,12 +94,8 @@ public class DuplicatesRemoverApp extends Application {
 						selectedSaveFilePath = selectedSaveLocation.getAbsolutePath();
 					} catch (NullPointerException exception) {
 					}
-					// removes duplicates from selected file and then exports it to the save
-					// location
-					Map<String, Integer> finalMapFromReadListFromFile = DuplicateRemover
-							.convertListToMapAndRemoveDuplicates(readListFromFile);
 
-					CsvReaderWriter.exportCsvFile(finalMapFromReadListFromFile, selectedSaveFilePath);
+					CsvExporter.exportCsvFile(readMapFromFile, selectedSaveFilePath);
 					statusLabel.setTextFill(Color.GREEN);
 					statusLabel.setText("DONE - Duplicates Removed and File Saved!");
 				}
