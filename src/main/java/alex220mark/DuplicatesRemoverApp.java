@@ -82,8 +82,9 @@ public class DuplicatesRemoverApp extends Application {
 				statusLabel.setTextFill(Color.RED);
 				statusLabel.setText("Please select a file...");
 			} else {
-				// if list comes back empty error message
 				Map<String, Integer> readMapFromFile = CsvReader.readCsvFile(selectedFilePath);
+
+				// if list comes back empty error message
 				if (readMapFromFile.isEmpty()) {
 					statusLabel.setTextFill(Color.RED);
 					statusLabel.setText("Invalid file, pick a .csv file, check format of csv file, and for blank rows");
@@ -93,8 +94,9 @@ public class DuplicatesRemoverApp extends Application {
 					try {
 						selectedSaveFilePath = selectedSaveLocation.getAbsolutePath();
 					} catch (NullPointerException exception) {
+						exception.printStackTrace();
 					}
-
+					
 					CsvExporter.exportCsvFile(readMapFromFile, selectedSaveFilePath);
 					statusLabel.setTextFill(Color.GREEN);
 					statusLabel.setText("DONE - Duplicates Removed and File Saved!");

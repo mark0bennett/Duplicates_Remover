@@ -23,8 +23,8 @@ public class CsvReader {
 				while ((line = bufferedReader.readLine()) != null) {
 					// splits the csv by a comma and creates a String array
 					String[] readLine = line.split(splitBy);
-					// check that the csv only has 2 columns, will return empty list if it has more
-					// and will return an empty list is an column is blank
+					// check that the csv only has 2 columns, will return empty map if it has more
+					// and will return an empty map is an column is blank
 					if (readLine.length >= 3 || readLine[0].isBlank() || readLine[1].isBlank()) {
 						return new HashMap<>();
 					}
@@ -44,10 +44,9 @@ public class CsvReader {
 					} else {
 						readMap.put(nameWhiteSpaceRemovedAllCaps, Integer.valueOf(readLine[1]));
 					}
-
 				}
 				bufferedReader.close();
-				// catches ANY exception and will just return a blank Map
+				// catches ANY exception and will just return an empty Map
 			} catch (Exception e) {
 				return new HashMap<>();
 			}
@@ -55,7 +54,7 @@ public class CsvReader {
 			// csv file
 			return readMap;
 		} else {
-			// if the file does not end in .csv a blank Map will be returned
+			// if the file does not end in .csv an empty Map will be returned
 			return new HashMap<>();
 		}
 	}
